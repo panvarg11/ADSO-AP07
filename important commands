@@ -1,0 +1,4 @@
+Escanear Puertos: ps -ef
+Escanear puerto especifico: ps -ef | grep 8080
+Escanear programa en puerto: netstat -nepal | grep 8080
+Matar proceso en puerto: kill 878/

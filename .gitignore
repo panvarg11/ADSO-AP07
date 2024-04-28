@@ -1,3 +1,6 @@
+#project junk files
+.vscode/
+
 # Logs
 logs
 *.log
