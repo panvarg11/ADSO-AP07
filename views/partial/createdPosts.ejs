@@ -3,95 +3,11 @@
     <%- include('postCreator.ejs') %>
 
 
+    <%# Pending tasks
+    Create an unordered list of items with the Titles of each post, by clicking the post, the page will direct us to the post content
+    each post will contain edit and delete buttons%>
+
+           
 
 
-        <%# if posts are created, for loop to display all posts otherwise, show post template%>
-
-            <% if(locals.postedItems){%>
-
-
-                <% for (let i=postedItems.length; i>0; i--){%>
-                    <%# sample template %>
-                        <div class="col-md-6">
-                            <div
-                                class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                                <div class="col p-4 d-flex flex-column position-static">
-                                    <strong class="d-inline-block mb-2 text-primary-emphasis">Post Number <%= (i) %>
-                                            </strong>
-                                    <h3 class="mb-0">
-                                        <%= postedItems[i-1].postTitle %>
-                                    </h3>
-                                    <div class="mb-1 text-body-secondary">The date will display here</div>
-                                    <p class="card-text mb-auto">
-                                        <%= postedItems[i-1].postContent %>
-                                    </p>
-                                    <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
-                                        Edit Post
-                                        <svg class="bi">
-                                            <use xlink:href="#chevron-right"></use>
-                                        </svg>
-                                    </a>
-                                    <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
-                                        Delete Post
-                                        <svg class="bi">
-                                            <use xlink:href="#chevron-right"></use>
-                                        </svg>
-                                    </a>
-                                </div>
-                                <div class="col-auto d-none d-lg-block">
-                                    <svg class="bd-placeholder-img" width="200" height="250"
-                                        xmlns="http://www.w3.org/2000/svg" role="img"
-                                        aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
-                                        [postedItems.length-1] focusable="false">
-                                        <title>Placeholder</title>
-                                        <rect width="100%" height="100%" fill="#55595c"></rect><text x="5%" y="50%"
-                                            fill="#eceeef" dy=".3em"><%=postedItems[i-1].author %></text>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                        <%# end of sample template %>
-
-                 <% } %>
-
-
-            <%} else {%>
-                                    <%# sample template %>
-
-                                        <div class="col-md-6">
-                                            <div
-                                                class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                                                <div class="col p-4 d-flex flex-column position-static">
-                                                    <strong class="d-inline-block mb-2 text-primary-emphasis">Sample
-                                                        Post</strong>
-                                                    <h3 class="mb-0">This will be your post title</h3>
-                                                    <div class="mb-1 text-body-secondary">The date will display here
-                                                    </div>
-                                                    <p class="card-text mb-auto">Your post content paragraph will be
-                                                        shown here
-                                                    </p>
-                                                    <a href="posts"
-                                                        class="icon-link gap-1 icon-link-hover stretched-link">
-                                                        Go to created posts
-                                                        <svg class="bi">
-                                                            <use xlink:href="#chevron-right"></use>
-                                                        </svg>
-                                                    </a>
-                                                </div>
-                                                <div class="col-auto d-none d-lg-block">
-                                                    <svg class="bd-placeholder-img" width="200" height="250"
-                                                        xmlns="http://www.w3.org/2000/svg" role="img"
-                                                        aria-label="Placeholder: Thumbnail"
-                                                        preserveAspectRatio="xMidYMid slice" focusable="false">
-                                                        <title>Placeholder</title>
-                                                        <rect width="100%" height="100%" fill="#55595c"></rect><text
-                                                            x="5%" y="50%" fill="#eceeef" dy=".3em">Your name</text>
-                                                    </svg>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <%# end of sample template %>
-            <%}%>
-
-
-</div>
+</div>s
