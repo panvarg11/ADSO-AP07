@@ -16,8 +16,8 @@
                             <div
                                 class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                                 <div class="col p-4 d-flex flex-column position-static">
-                                    <strong class="d-inline-block mb-2 text-primary-emphasis">Post Number <%= (i) %>
-                                            </strong>
+                                    <strong class="d-inline-block mb-2 text-primary-emphasis">Post I <%= (i) %>
+                                    </strong>
                                     <h3 class="mb-0">
                                         <%= postedItems[i-1].postTitle %>
                                     </h3>
@@ -25,18 +25,12 @@
                                     <p class="card-text mb-auto">
                                         <%= postedItems[i-1].postContent %>
                                     </p>
-                                    <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
-                                        Edit Post
-                                        <svg class="bi">
-                                            <use xlink:href="#chevron-right"></use>
-                                        </svg>
-                                    </a>
-                                    <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
-                                        Delete Post
-                                        <svg class="bi">
-                                            <use xlink:href="#chevron-right"></use>
-                                        </svg>
-                                    </a>
+                                    <form action="/edit" method="POST" class="buttons">
+                                        <button type="submit" value="edit" name="choice">Edit Post</button>
+                                    </form>
+                                    <form action="/delete" method="POST" class="buttons">
+                                        <button type="submit" value="<%- i %>" name="choice">Delete post</button>
+                                    </form>
                                 </div>
                                 <div class="col-auto d-none d-lg-block">
                                     <svg class="bd-placeholder-img" width="200" height="250"
@@ -52,10 +46,10 @@
                         </div>
                         <%# end of sample template %>
 
-                 <% } %>
+                            <% } %>
 
 
-            <%} else {%>
+                                <%} else {%>
                                     <%# sample template %>
 
                                         <div class="col-md-6">
@@ -91,7 +85,7 @@
                                             </div>
                                         </div>
                                         <%# end of sample template %>
-            <%}%>
+                                            <%}%>
 
 
 </div>

@@ -1,0 +1,75 @@
+<%- include('partial/header.ejs') %>
+
+
+
+    <main class="container">
+
+        <%# If there are no posts, use if to show and ask to create new posts %>
+
+            <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+                <h1 class="display-4 fw-normal text-body-emphasis">Edit your post</h1>
+                <p class="fs-5 text-body-secondary">Choose your post and set the changes <br> You can edit your post
+                    content and title, the author cannot be changed</p>
+            </div>
+
+            <div class="container">
+
+                <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+                    <div class="row">
+
+                        <div class="col-9">
+                            <h2>Here will display editor</h2>
+                            <div class="col-md-12">
+                                <div
+                                    class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                                    <div class="col p-4 d-flex flex-column position-static">
+                                        <strong class="d-inline-block mb-2 text-primary-emphasis">Posts Editor</strong>
+                                        <h3 class="mb-0">New Post Title</h3>
+
+                                        <form action="/edit" method="POST">
+                                            
+                                            <input type="text" name="postTitle" placeholder="Enter the post Title"
+                                                required>
+                                                <div class="py-1"></div>
+                                                <h3>New Post Content</h3>
+                                            <textarea class="pt-10" cols="80" name="postContent" 
+                                                placeholder="Enter post content here" required></textarea>
+                                                <br>
+                                            <button type="submit" class="btn btn-primary w-50 my-1" value="OK">Confirm
+                                                changes</button>
+                                        </form>
+
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-3">
+                            <h2>Here will display a list of posts</h2>
+
+                            <% for(let i=postedItems.length; i>0; i--) {%>
+
+                                <div><h4><%= postedItems[i-1].postTitle %></h3></div>
+
+                            <% }%>
+                        
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+    </main>
+
+    <form action="/functiontest" method="POST" class="buttons">
+        <button type="submit" value="test1" name="choice">test funcion #1</button>
+        <button type="submit" value="test2" name="choice">Test Function #2</button>
+    </form>
+
+    <%- include('partial/footer') %>
