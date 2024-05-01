@@ -12,64 +12,133 @@
                     content and title, the author cannot be changed</p>
             </div>
 
-            <div class="container">
+            <%# full inner page %>
+                <div class="container">
 
-                <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-                    <div class="row">
 
-                        <div class="col-9">
-                            <h2>Here will display editor</h2>
-                            <div class="col-md-12">
-                                <div
-                                    class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                                    <div class="col p-4 d-flex flex-column position-static">
-                                        <strong class="d-inline-block mb-2 text-primary-emphasis">Posts Editor</strong>
-                                        <h3 class="mb-0">New Post Title</h3>
+                    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+                        <div class="row">
 
-                                        <form action="/edit" method="POST">
+                            <%# add if statement here with both columns %>
+
+                            <% if (locals.postedItems.length>0){ %>
+
+                               
+
+                                    <%# left column %>
+                                    <div class="col-9">
+
+                                        <% if (locals.chosenItem) {%>
+                                            <h2>Editor open for POST # <%= chosenItem %></h2>
+                                            <%# left column content %>
+                                        <div class="col-md-12">
+                                            <div
+                                                class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                                                <div class="col p-4 d-flex flex-column position-static">
+                                                    <strong class="d-inline-block mb-2 text-primary-emphasis">Posts
+                                                        Editor</strong>
+                                                    <h3 class="mb-0"> New title for post <%- chosenItem %></h3>
+
+                                                    <form action="/edit-confirm" method="POST">
+
+                                                        <input type="text" name="postTitle"
+                                                            placeholder="Enter the post Title" required>
+                                                        <div class="py-1"></div>
+                                                        <h3>New Content for post <%- chosenItem %></h3>
+                                                        <textarea class="pt-10" cols="80" name="postContent"
+                                                            placeholder="Enter post content here"
+                                                            required></textarea>
+                                                        <br>
+                                                        <button type="submit" class="btn btn-primary w-50 my-1"
+                                                            value="OK">Confirm
+                                                            changes</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <%# end of left column content %>
                                             
-                                            <input type="text" name="postTitle" placeholder="Enter the post Title"
-                                                required>
-                                                <div class="py-1"></div>
-                                                <h3>New Post Content</h3>
-                                            <textarea class="pt-10" cols="80" name="postContent" 
-                                                placeholder="Enter post content here" required></textarea>
-                                                <br>
-                                            <button type="submit" class="btn btn-primary w-50 my-1" value="OK">Confirm
-                                                changes</button>
-                                        </form>
+                                            <% }else { %>
+                                            <h2>no post was selected</h2>
+
+                                                <%# left column content %>
+                                        <div class="col-md-12">
+                                            <div
+                                                class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                                                <div class="col p-4 d-flex flex-column position-static">
+                                                    <strong class="d-inline-block mb-2 text-primary-emphasis">No post has been selected</strong>
+                                                    <h3 class="mb-0">Select a post to edit</h3>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <%# end of left column content %>
+
+                                        <% } %>
+                                        
+                                        
 
                                     </div>
+                                    <%# end of left column %>
 
+                                    <%# right column starts %>
+                                    <div class="col-3">
+                                                <h2>posts list</h2>
+                                                <% for(let i=postedItems.length; i>0; i--) {%>
+                                                    <form action="/edit" method="POST" class="buttons">
+                                                        <button value="<%- i %>" name="choice">
+                                                            <h4>
+                                                                <%= postedItems[i-1].postTitle %> post id <%- i %>
+                                                                        </h3>
+                                                        </button>
+                                                        <br>
+                                                    </form>
+                                                    <% }%>
+                                            </div>
+                                    <%# right column ends %>
+                                
+                            <% } else { %>
 
+                                <%# left column %>
+                                <div class="col-9">
 
+                                    <div class="col-md-12">
+                                        <div
+                                            class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                                            <div class="col p-4 d-flex flex-column position-static">
+                                                <strong class="d-inline-block mb-2 text-primary-emphasis">No items to display</strong>
+                                                <a href="/"><h3 class="mb-0">Create a new post</h3></a>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                                <%# end of left column %>
 
+                                <%# right column starts %>
+                                <div class="col-3">
+                                            <h2>There are no items to display</h2>
+                                        </div>
+                                <%# right column ends %>
+                                
+                            <% } %>
+
+                            <%# end if statement here with both columns %>
+
+                                    
 
                         </div>
 
-                        <div class="col-3">
-                            <h2>Here will display a list of posts</h2>
-
-                            <% for(let i=postedItems.length; i>0; i--) {%>
-
-                                <div><h4><%= postedItems[i-1].postTitle %></h3></div>
-
-                            <% }%>
-                        
-                        </div>
                     </div>
+
+
+
+
 
                 </div>
 
-            </div>
-
     </main>
 
-    <form action="/functiontest" method="POST" class="buttons">
-        <button type="submit" value="test1" name="choice">test funcion #1</button>
-        <button type="submit" value="test2" name="choice">Test Function #2</button>
-    </form>
+   
 
     <%- include('partial/footer') %>

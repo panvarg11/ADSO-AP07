@@ -1,0 +1,46 @@
+
+use this in js files .js
+
+//Start testing area
+
+var test = []
+var testI = 0;
+
+app.post("/functiontest", (req, res) => {
+
+    
+    switch (req.body.choice) {
+        case "test1": console.log("you have pressed test 1");
+
+
+            //actions of test button 1
+            posted.push({
+                postTitle:"Title",
+                postContent:"content",
+                author:"author"
+            })
+            console.log(posted);
+        
+
+            break;
+
+
+        case "test2": console.log("you have pressed test 2");
+            //actions of test button 1 
+            test[1].title="New title of test #2";
+            test[1].content="New content of test #2"
+
+            break;
+
+        default:
+            break;
+    }
+
+})
+
+use this in html/ejs
+
+<form action="/functiontest" method="POST" class="buttons">
+<button type="submit" value="test1" name="choice">test funcion #1</button>
+<button type="submit" value="test2" name="choice">Test Function #2</button>
+</form>

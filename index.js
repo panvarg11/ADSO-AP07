@@ -5,6 +5,7 @@ import bodyParser from "body-parser";
 const app = express();
 const port = 3000;
 var posted = [];
+var chosenItem;
 
 function deleter() {
     console.log(this);
@@ -28,7 +29,9 @@ app.get("/posts", (req, res) => {
 })
 
 app.get("/edit", (req, res) => {
+
     res.render("edit.ejs", {postedItems: posted})
+
 })
 
 app.get("/contact", (req, res) => {
@@ -39,61 +42,39 @@ app.get("/contact", (req, res) => {
 app.post("/create", (req, res) => {
     posted.push(req.body);
     
-    res.render("posts.ejs", { postedItems: posted });
+    res.render("posts.ejs", { postedItems: posted});
 })
 
 app.post("/edit", (req, res) => {
-    console.log(req.body);
-    posted.push(req.body);
-    res.render("edit.ejs", {postedItems: posted})
     
-   
+    
+    chosenItem = req.body.choice
+    res.render("edit.ejs",  {postedItems: posted, chosenItem:chosenItem} )
+
+    
+    
+})
+
+app.post("/edit-confirm", (req,res)=>{
+
+    
+    posted[chosenItem-1].postTitle=req.body.postTitle;
+    posted[chosenItem-1].postContent=req.body.postContent;
+    chosenItem ="";
+    res.render("posts.ejs", {postedItems: posted, chosenItem:chosenItem} )
+  
+
 })
 
 app.post("/delete", (req, res) => {
 
-    console.log(req.body.choice);
+   
     posted.splice(req.body.choice - 1, 1)
     res.render("posts.ejs", { postedItems: posted })
-})
-
-
-
-//Start testing area
-
-var test = []
-var testI = 0;
-
-app.post("/functiontest", (req, res) => {
-
-    
-    switch (req.body.choice) {
-        case "test1": console.log("you have pressed test 1");
-
-
-            //actions of test button 1
-            test.push({
-                title:"Title",
-                content:"content",
-                author:"author"
-            })
-            console.log(test);
-
-            break;
-
-
-        case "test2": console.log("you have pressed test 2");
-            //actions of test button 1 
-            test[1].title="New title of test #2";
-            test[1].content="New content of test #2"
-
-            break;
-
-        default:
-            break;
-    }
 
 })
+
+
 
 
 app.listen(port, () => {

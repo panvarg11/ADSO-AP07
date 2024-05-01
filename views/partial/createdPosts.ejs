@@ -26,7 +26,7 @@
                                         <%= postedItems[i-1].postContent %>
                                     </p>
                                     <form action="/edit" method="POST" class="buttons">
-                                        <button type="submit" value="edit" name="choice">Edit Post</button>
+                                        <button type="submit" value="<%- i %>" name="choice">Edit Post</button>
                                     </form>
                                     <form action="/delete" method="POST" class="buttons">
                                         <button type="submit" value="<%- i %>" name="choice">Delete post</button>
