@@ -1,31 +1,70 @@
 import express from "express";
 import bodyParser from "body-parser";
+import pg from "pg";
 
 
 const app = express();
 const port = 3000;
+const db = new pg.Client({
+    user:"postgres",
+    host: "localhost",
+    database:"tienda",
+    password: "sulmar2001",
+    port: 5432
+})
+
+db.connect();
+
+
 var posted = [];
+
 var chosenItem;
 
-function deleter() {
-    console.log(this);
-}
+
 
 app.use(express.static("public"))
 app.use(bodyParser.urlencoded({ extended: false }))
 
 
-app.get("/", (req, res) => {
-    res.render("index.ejs")
+app.get("/", async (req, res) => {
+
+    
+  const result =  await db.query("SELECT * FROM Productos");
+   
+    let results =[]
+
+    result.rows.forEach((product)=>{
+        results.push(product);
+    });
+
+    posted =results;
+    
+
+    res.render("index.ejs");
+   
+
+    
 })
 
-app.get("/posts", (req, res) => {
+app.get("/posts", async (req, res) => {
+
+    const result =  await db.query("SELECT * FROM Productos");
+   
+    let results =[]
+
+    result.rows.forEach((product)=>{
+        results.push(product);
+    });
+
+    posted =results;
 
     if (posted.length > 0) {
         res.render("posts.ejs", { postedItems: posted })
     } else {
         res.render("posts.ejs")
     }
+
+    
 })
 
 app.get("/edit", (req, res) => {
@@ -39,10 +78,19 @@ app.get("/contact", (req, res) => {
 })
 
 //post section
-app.post("/create", (req, res) => {
+app.post ("/create", async (req, res) => {
+
+    let titulo = req.body.titulo;
+    let descripcion = req.body.descripcion;
+    let precio = Number(req.body.precio);
+
+    await db.query(`INSERT INTO productos (titulo, descripcion, precio) VALUES ('${titulo}', '${descripcion}', ${precio})`)
+
     posted.push(req.body);
     
-    res.render("posts.ejs", { postedItems: posted});
+    res.redirect("/posts");
+
+    
 })
 
 app.post("/edit", (req, res) => {
@@ -55,23 +103,34 @@ app.post("/edit", (req, res) => {
     
 })
 
-app.post("/edit-confirm", (req,res)=>{
+app.post("/edit-confirm", async (req,res)=>{
 
     
-    posted[chosenItem-1].postTitle=req.body.postTitle;
-    posted[chosenItem-1].postContent=req.body.postContent;
+  
+    let titulo=req.body.titulo;
+    let descripcion=req.body.descripcion;
+    let precio= Number(req.body.precio);
+    let id = Number(chosenItem)
     chosenItem ="";
-    res.render("posts.ejs", {postedItems: posted, chosenItem:chosenItem} )
+    
+    await db.query(`UPDATE Productos SET (Titulo, Descripcion, Precio) = ('${titulo}', '${descripcion}', ${precio}) WHERE Id = ${id}`)
+    res.redirect("/posts")
+  
   
 
 })
 
-app.post("/delete", (req, res) => {
+app.post("/delete", async (req, res) => {
 
    
-    posted.splice(req.body.choice - 1, 1)
-    res.render("posts.ejs", { postedItems: posted })
+    let deleted = Number(req.body.choice)
 
+    await db.query(`DELETE FROM Productos WHERE Id = ${deleted}`)
+    
+    res.redirect("/posts")
+
+    
+0
 })
 
 

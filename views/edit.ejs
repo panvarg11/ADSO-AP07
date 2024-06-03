@@ -7,9 +7,8 @@
         <%# If there are no posts, use if to show and ask to create new posts %>
 
             <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-                <h1 class="display-4 fw-normal text-body-emphasis">Edit your post</h1>
-                <p class="fs-5 text-body-secondary">Choose your post and set the changes <br> You can edit your post
-                    content and title, the author cannot be changed</p>
+                <h1 class="display-4 fw-normal text-body-emphasis">Editar la información del producto</h1>
+                <p class="fs-5 text-body-secondary">Escoja un producto para establecer cambios</p>
             </div>
 
             <%# full inner page %>
@@ -29,7 +28,7 @@
                                     <div class="col-9">
 
                                         <% if (locals.chosenItem) {%>
-                                            <h2>Editor open for POST # <%= chosenItem %></h2>
+                                            <h2>Estas modificando el producto # <%= chosenItem %></h2>
                                             <%# left column content %>
                                         <div class="col-md-12">
                                             <div
@@ -37,21 +36,24 @@
                                                 <div class="col p-4 d-flex flex-column position-static">
                                                     <strong class="d-inline-block mb-2 text-primary-emphasis">Posts
                                                         Editor</strong>
-                                                    <h3 class="mb-0"> New title for post <%- chosenItem %></h3>
+                                                    <h3 class="mb-0"> Nuevo Titulo del producto<%- chosenItem %></h3>
 
                                                     <form action="/edit-confirm" method="POST">
 
-                                                        <input type="text" name="postTitle"
-                                                            placeholder="Enter the post Title" required>
+                                                        <input type="text" name="titulo"
+                                                            placeholder="Ingrese el título del producto" required>
                                                         <div class="py-1"></div>
-                                                        <h3>New Content for post <%- chosenItem %></h3>
-                                                        <textarea class="pt-10" cols="80" name="postContent"
-                                                            placeholder="Enter post content here"
+                                                        <h3>Nueva Descripcion del producto <%- chosenItem %></h3>
+                                                        <textarea class="pt-10" cols="80" name="descripcion"
+                                                            placeholder="Ingrese una descripcion del producto"
                                                             required></textarea>
                                                         <br>
+                                                        <h3>NNuevo Precio del Producto <%- chosenItem %></h3>
+                                                        <input type="number" name="precio" placeholder="Precio del Producto" required>
+                                                        <br/>
+                                                        
                                                         <button type="submit" class="btn btn-primary w-50 my-1"
-                                                            value="OK">Confirm
-                                                            changes</button>
+                                                            value="OK">Confirmar Cambios</button>
                                                     </form>
                                                 </div>
                                             </div>
@@ -59,15 +61,15 @@
                                         <%# end of left column content %>
                                             
                                             <% }else { %>
-                                            <h2>no post was selected</h2>
+                                            <h2>No has seleccionado productos para modificar</h2>
 
                                                 <%# left column content %>
                                         <div class="col-md-12">
                                             <div
                                                 class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                                                 <div class="col p-4 d-flex flex-column position-static">
-                                                    <strong class="d-inline-block mb-2 text-primary-emphasis">No post has been selected</strong>
-                                                    <h3 class="mb-0">Select a post to edit</h3>
+                                                    <strong class="d-inline-block mb-2 text-primary-emphasis">No has elegido productos para modificar</strong>
+                                                    <h3 class="mb-0">Escoge un producto para modificar</h3>
 
                                                 </div>
                                             </div>
@@ -83,12 +85,12 @@
 
                                     <%# right column starts %>
                                     <div class="col-3">
-                                                <h2>posts list</h2>
+                                                <h2>Inventario</h2>
                                                 <% for(let i=postedItems.length; i>0; i--) {%>
                                                     <form action="/edit" method="POST" class="buttons">
                                                         <button value="<%- i %>" name="choice">
                                                             <h4>
-                                                                <%= postedItems[i-1].postTitle %> post id <%- i %>
+                                                                <%= postedItems[i-1].titulo %> post id <%- i %>
                                                                         </h3>
                                                         </button>
                                                         <br>
@@ -106,8 +108,8 @@
                                         <div
                                             class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                                             <div class="col p-4 d-flex flex-column position-static">
-                                                <strong class="d-inline-block mb-2 text-primary-emphasis">No items to display</strong>
-                                                <a href="/"><h3 class="mb-0">Create a new post</h3></a>
+                                                <strong class="d-inline-block mb-2 text-primary-emphasis">No hay productos en el inventario</strong>
+                                                <a href="/"><h3 class="mb-0">Añadir un producto al inventario</h3></a>
 
                                             </div>
                                         </div>
@@ -117,7 +119,7 @@
 
                                 <%# right column starts %>
                                 <div class="col-3">
-                                            <h2>There are no items to display</h2>
+                                            <h2>TNo hay productos para mostrar</h2>
                                         </div>
                                 <%# right column ends %>
                                 
